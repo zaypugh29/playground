@@ -1,0 +1,108 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "init",
+            "type": "shell",
+            "command": "npm init -y",
+            "problemMatcher": [],
+        },
+        {
+            "label": "server",
+            "type": "shell",
+            "command": "npm install lite-server",
+            "problemMatcher": [],
+        },
+        {
+            "label": "sass",
+            "type": "shell",
+            "command": "npm install node-sass",
+            "problemMatcher": [],
+        },
+        {
+            "label": "bootstrap",
+            "type": "shell",
+            "command": "npm install bootstrap@5.3.0",
+            "problemMatcher": [],
+
+        },
+        {
+            "label": "tsc",
+            "type": "shell",
+            "command": "tsc --init",
+            "problemMatcher": [],
+
+        },
+        {
+            "label": "mkdir",
+            "type": "shell",
+            "command": "mkdir scss ts js",
+            "problemMatcher": [],
+
+        },
+        // Setup Environment
+        {
+            "label": "setup environment",
+            "type": "shell",
+            "dependsOn": [
+                "init",
+                "server",
+                "sass",
+                "bootstrap",
+                "tsc",
+                "mkdir"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+        },
+        // Running the scripts
+        {
+            "label": "run lite-server",
+            "type": "shell",
+            "command": "npm start",
+            "presentation": {
+                "panel": "shared",
+            },
+            "group": "build"
+        },
+        {
+            "label": "run node-sass",
+            "type": "shell",
+            "command": "npm run sass",
+            "presentation": {
+                "panel": "shared",
+            },
+            "group": "build"
+        },
+        {
+            "label": "tsc watch",
+            "type": "shell",
+            "command": "tsc -w",
+            "presentation": {
+                "panel": "shared",
+            },
+            "group": "build"
+        },
+        {
+            "label": "Open Playground",
+            "type": "shell",
+            "dependsOn": [
+                "run lite-server",
+                "run node-sass",
+                "tsc watch",
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+        },
+    ]
+}
