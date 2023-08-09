@@ -5183,4 +5183,5 @@ div[class*="text"] {
 
 ::selection {
   background-color: #ed87e3;
-  font-size: 50px; }
+  font-size: 20rem;
+  color: blue; }

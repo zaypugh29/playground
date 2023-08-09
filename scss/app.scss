@@ -9,38 +9,38 @@
 $tertiary: #ed87e3;
 $aa: #ee7623;
 
-$blue:    #0d6efd;
-$indigo:  #6610f2;
-$purple:  #6f42c1;
-$pink:    #d63384;
-$red:     #dc3545;
-$orange:  #fd7e14;
-$yellow:  #ffc107;
-$green:   #198754;
-$teal:    #20c997;
-$cyan:    #0dcaf0;
+$blue: #0d6efd;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #d63384;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #198754;
+$teal: #20c997;
+$cyan: #0dcaf0;
 
-$primary:       $blue;
-$secondary:     gold;
-$success:       $green;
-$info:          $cyan;
-$warning:       $yellow;
-$danger:        $red;
+$primary: $blue;
+$secondary: gold;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
 
 $theme-colors: (
-  "primary":    $primary,
-  "secondary":  $secondary,
-  "success":    $success,
-  "info":       $info,
-  "warning":    $warning,
-  "danger":     $danger,
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
 );
 
 // Create your own map
 $custom-colors: (
   "tertiary": $tertiary,
-  "red":      $red,
-  "aa":       $aa
+  "red": $red,
+  "aa": $aa
 );
 
 // Merge the maps
@@ -75,18 +75,19 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 //  :class ::element
 body {
-    font-family: "Baloo Bhai 2";
+  font-family: "Baloo Bhai 2";
 }
 
 div[class~="d-flex"] {
-    background-color: bisque;
+  background-color: bisque;
 }
+
 div[class*="text"] {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 ::selection {
-    background-color: $tertiary;
-    font-size: 50px;
+  background-color: $tertiary;
+  font-size: 20rem;
+  color: blue;
 }
-
