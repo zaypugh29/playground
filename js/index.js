@@ -16,23 +16,35 @@ const axios_1 = __importDefault(require("axios"));
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const request = () => __awaiter(this, void 0, void 0, function* () {
-            const response = yield axios_1.default.get("https://swapi.dev/api/people");
-            console.log(response.data);
-            // return response.data.results;
+            try {
+                const response = yield axios_1.default.get("https://swapi.dev/api/people");
+                return response.data.results;
+            }
+            catch (error) {
+                console.log("oh no :/");
+            }
         });
-        request();
         const films = () => __awaiter(this, void 0, void 0, function* () {
-            const films = yield axios_1.default.get("https://swapi.dev/api/films");
-            return films.data.results;
+            try {
+                const films = yield axios_1.default.get("https://swapi.dev/api/films");
+                return films.data.results;
+            }
+            catch (error) {
+                console.log("Come again? ");
+            }
         });
-        // const peopleArr = await request();
-        // const filmArr = await films();
-        // for (let person of peopleArr) {
-        //     console.log(person.name)
-        // }
-        // for (let film of filmArr){
-        //     console.log(film.title);
-        // }
+        const peopleArr = yield request();
+        const filmArr = yield films();
+        if (peopleArr) {
+            for (let person of peopleArr) {
+                console.log(person.name);
+            }
+        }
+        if (filmArr) {
+            for (let film of filmArr) {
+                console.log(film.title);
+            }
+        }
     });
 }
 main();

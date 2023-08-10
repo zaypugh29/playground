@@ -49,28 +49,38 @@ interface movie {
 async function main() {
 
     const request = async () => {
-        const response = await axios.get<response>("https://swapi.dev/api/people");
-        console.log(response.data);
-        // return response.data.results;
+        try {
+            const response = await axios.get<response>("https://swapi.dev/api/people");
+            return response.data.results;
+        } catch (error) {
+            console.log("oh no :/");
+        }
     }
-
-    request();
 
     const films = async () => {
-        const films = await axios.get<movieResponse>("https://swapi.dev/api/films");
-        return films.data.results;
+        try {
+            const films = await axios.get<movieResponse>("https://swapi.dev/api/films");
+            return films.data.results;
+        } catch (error) {
+            console.log("Come again? ");
+        }
     }
 
-    // const peopleArr = await request();
-    // const filmArr = await films();
+    const peopleArr = await request();
+    const filmArr = await films();
 
-    // for (let person of peopleArr) {
-    //     console.log(person.name)
-    // }
+    if (peopleArr){
+        for (let person of peopleArr) {
+            console.log(person.name)
+        }
+    }
 
-    // for (let film of filmArr){
-    //     console.log(film.title);
-    // }
+    if (filmArr) {
+        for (let film of filmArr){
+            console.log(film.title);
+        }
+    }
+
 
 
 }
