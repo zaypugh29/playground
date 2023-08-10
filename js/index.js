@@ -45,7 +45,8 @@ function main() {
         //         console.log(film.title);
         //     }
         // }
-        console.log("In order", filmArr);
+        const newFilmArray = filmArr === null || filmArr === void 0 ? void 0 : filmArr.map((x) => x.episode_id);
+        console.log(newFilmArray === null || newFilmArray === void 0 ? void 0 : newFilmArray.sort());
     });
 }
 main();

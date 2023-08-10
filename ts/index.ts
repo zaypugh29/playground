@@ -1,28 +1,25 @@
 import axios from 'axios'
 
 interface funfacts {
-    name: string,
-    height: number,
-    mass: number,
-    hair_color: string,
-    skin_color: string,
-    eye_color: string,
-    birth_year: string,
-    gender: string,
-    homeworld: string,
-    films: string[],
-    species: string[],
-    vehicles: string[],
-    starships: string[],
-    created: string,
-    edited: string,
-    url: string
+    name?: string,
+    height?: number,
+    mass?: number,
+    hair_color?: string,
+    skin_color?: string,
+    eye_color?: string,
+    birth_year?: string,
+    gender?: string,
+    homeworld?: string,
+    films?: string[],
+    species?: string[],
+    vehicles?: string[],
+    starships?: string[],
+    created?: string,
+    edited?: string,
+    url?: string
 }
 
-interface attributes {
-    title: string,
-    episode_id: number
-}
+
 
 interface response {
     results?: funfacts[],
@@ -32,18 +29,26 @@ interface response {
 }
 
 interface movieResponse {
-    results: attributes[]
+    results?: movie[]
     count?: number,
     next?: string,
     previous?: boolean
 }
 
 interface movie {
-    title: string,
-    episode_id: number,
-    opening_crawl: string,
-    director: string,
-    producer: string
+    title?: string,
+    episode_id?: number,
+    opening_crawl?: string,
+    director?: string,
+    producer?: string,
+    release_date?: string,
+    character?: string[],
+    planets?: string[],
+    vehicles?: string[],
+    species?: string,
+    created?: string,
+    edited?: string,
+    url?: string
 }
 
 async function main() {
@@ -69,17 +74,22 @@ async function main() {
     const peopleArr = await request();
     const filmArr = await films();
 
-    if (peopleArr){
-        for (let person of peopleArr) {
-            console.log(person.name)
-        }
-    }
 
-    if (filmArr) {
-        for (let film of filmArr){
-            console.log(film.title);
-        }
-    }
+    // if (peopleArr){
+    //     for (let person of peopleArr) {
+    //         console.log(person.name)
+    //     }
+    // }
+
+    // if (filmArr) {
+    //     for (let film of filmArr){
+    //         console.log(film.title);
+    //     }
+    // }
+
+    const newFilmArray = filmArr?.map( (x) => x.episode_id);
+    console.log(newFilmArray?.sort());
+
 
 
 
