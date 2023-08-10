@@ -35,16 +35,17 @@ function main() {
         });
         const peopleArr = yield request();
         const filmArr = yield films();
-        if (peopleArr) {
-            for (let person of peopleArr) {
-                console.log(person.name);
-            }
-        }
-        if (filmArr) {
-            for (let film of filmArr) {
-                console.log(film.title);
-            }
-        }
+        // if (peopleArr){
+        //     for (let person of peopleArr) {
+        //         console.log(person.name)
+        //     }
+        // }
+        // if (filmArr) {
+        //     for (let film of filmArr){
+        //         console.log(film.title);
+        //     }
+        // }
+        console.log("In order", filmArr);
     });
 }
 main();
