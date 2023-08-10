@@ -31,11 +31,12 @@ interface movie {
     producer: string
 }
 
-function printFilms(calls: string[]) {
-    calls.forEach(el => {
+async function printFilms(calls: string[]) {
+    await calls.forEach(el => {
         axios.get<movie>(el)
             .then(res => {
                 console.log(res.data.title);
+                return res.data.title;
             })
             .catch(err => {
                 console.log(`Something went wrong.`);
@@ -44,15 +45,20 @@ function printFilms(calls: string[]) {
 
 }
 
-function main() {
-    axios.get<response>("https://swapi.dev/api/people")
+async function main() {
+    const request = await axios.get<response>("https://swapi.dev/api/people")
         .then(res => {
             const results = res.data.results;
+            // console.log("1", results[0].films)
             printFilms(results[0].films)
+            // printFilms(results[0].films)
+            return results[0].films;
         })
-        .catch((err) =>
+        .catch((err) => {
             console.log("Error, something went wrong.")
-        )
+        })
+
+    // console.log("2", request);
 }
 
 main();
