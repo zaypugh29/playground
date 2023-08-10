@@ -13,34 +13,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
-function printFilms(calls) {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield calls.forEach(el => {
-            axios_1.default.get(el)
-                .then(res => {
-                console.log(res.data.title);
-                return res.data.title;
-            })
-                .catch(err => {
-                console.log(`Something went wrong.`);
-            });
-        });
-    });
-}
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const request = yield axios_1.default.get("https://swapi.dev/api/people")
             .then(res => {
-            const results = res.data.results;
-            // console.log("1", results[0].films)
-            printFilms(results[0].films);
-            // printFilms(results[0].films)
-            return results[0].films;
+            return res.data.results;
         })
             .catch((err) => {
             console.log("Error, something went wrong.");
         });
-        // console.log("2", request);
+        // console.log(request);
+        const films = yield axios_1.default.get("https://swapi.dev/api/films")
+            .then(resp => {
+            return resp.data.results;
+        });
+        let movies = [];
+        for (const film of films) {
+            if (film.episode_id) {
+                const title = film.episode_id;
+                movies.push(title);
+            }
+        }
     });
 }
 main();

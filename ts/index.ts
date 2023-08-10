@@ -19,8 +19,17 @@ interface funfacts {
     url: string
 }
 
+interface attributes {
+    title: string,
+    episode_id: number
+}
+
 interface response {
-    results: funfacts[]
+    results: funfacts[],
+}
+
+interface movieResponse {
+    results: attributes[]
 }
 
 interface movie {
@@ -31,34 +40,30 @@ interface movie {
     producer: string
 }
 
-async function printFilms(calls: string[]) {
-    await calls.forEach(el => {
-        axios.get<movie>(el)
-            .then(res => {
-                console.log(res.data.title);
-                return res.data.title;
-            })
-            .catch(err => {
-                console.log(`Something went wrong.`);
-            })
-    })
-
-}
-
 async function main() {
     const request = await axios.get<response>("https://swapi.dev/api/people")
         .then(res => {
-            const results = res.data.results;
-            // console.log("1", results[0].films)
-            printFilms(results[0].films)
-            // printFilms(results[0].films)
-            return results[0].films;
+            return res.data.results;
         })
         .catch((err) => {
             console.log("Error, something went wrong.")
         })
+    // console.log(request);
 
-    // console.log("2", request);
+    const films = await axios.get<movieResponse>("https://swapi.dev/api/films")
+        .then( resp => {
+            return resp.data.results;
+        })
+    
+    let movies = [];
+    for (const film of films) {
+        if (film.episode_id) {
+            const title =  film.episode_id;
+            movies.push(title);
+        }
+    }
+
+
 }
 
 main();
