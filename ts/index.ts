@@ -25,11 +25,17 @@ interface attributes {
 }
 
 interface response {
-    results: funfacts[],
+    results?: funfacts[],
+    count?: number,
+    next?: string,
+    previous?: boolean
 }
 
 interface movieResponse {
     results: attributes[]
+    count?: number,
+    next?: string,
+    previous?: boolean
 }
 
 interface movie {
@@ -41,29 +47,37 @@ interface movie {
 }
 
 async function main() {
-    const request = await axios.get<response>("https://swapi.dev/api/people")
-        .then(res => {
-            return res.data.results;
-        })
-        .catch((err) => {
-            console.log("Error, something went wrong.")
-        })
-    // console.log(request);
 
-    const films = await axios.get<movieResponse>("https://swapi.dev/api/films")
-        .then( resp => {
-            return resp.data.results;
-        })
-    
-    let movies = [];
-    for (const film of films) {
-        if (film.episode_id) {
-            const title =  film.episode_id;
-            movies.push(title);
-        }
+    const request = async () => {
+        const response = await axios.get<response>("https://swapi.dev/api/people");
+        console.log(response.data);
+        // return response.data.results;
     }
+
+    request();
+
+    const films = async () => {
+        const films = await axios.get<movieResponse>("https://swapi.dev/api/films");
+        return films.data.results;
+    }
+
+    // const peopleArr = await request();
+    // const filmArr = await films();
+
+    // for (let person of peopleArr) {
+    //     console.log(person.name)
+    // }
+
+    // for (let film of filmArr){
+    //     console.log(film.title);
+    // }
 
 
 }
 
 main();
+
+// The point of the 'await' keyword is so that you do not have to attach a .then to functions
+// that return promises.
+
+// These axios requests should be their own functions. Return the data, and then work with it
