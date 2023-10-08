@@ -78,9 +78,9 @@ body {
   font-family: "Baloo Bhai 2";
 }
 
-div[class~="d-flex"] {
-  background-color: bisque;
-}
+// div[class~="d-flex"] {
+//   background-color: bisque;
+// }
 
 div[class*="text"] {
   font-size: 1rem;
@@ -90,4 +90,8 @@ div[class*="text"] {
   background-color: $tertiary;
   font-size: 20rem;
   color: blue;
+}
+
+.ddms {
+  box-shadow: black 0px 15px;
 }
